@@ -72,9 +72,9 @@ export const Education = () => {
   };
 
   return (
-    <section className="py-12 px-6 bg-[#0f172a] text-white">
+    <section className="py-12 px-6 text-white">
       <div className="flex justify-between items-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#38bdf8]">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#38bdf8] px-16">
           My Education
         </h2>
         <button
@@ -86,7 +86,7 @@ export const Education = () => {
       </div>
 
       {/* Education Cards */}
-      <div className="py-12 px-8 flex flex-wrap gap-6 justify-center md:justify-start">
+      <div className="py-12 px-18 flex flex-wrap gap-6 justify-center md:justify-start">
         {educations.map((edu, index) => (
           <motion.div
             key={index}
@@ -104,11 +104,11 @@ export const Education = () => {
       {/* Modal Form */}
       {showForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-          <div className="bg-white text-black p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-center text-[#0f172a]">
+          <div className="bg-[#1e293b]/80 text-black p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-center text-[#38bdf8]">
               Add New Education
             </h3>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 text-[#38bdf8]">
               <input
                 type="text"
                 name="institute"

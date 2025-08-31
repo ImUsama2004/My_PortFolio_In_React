@@ -2,7 +2,7 @@ import React from "react";
 
 export const EducationCard = ({ institute, degree, year, cgpa, percentage, onRemove }) => {
   return (
-    <div className="p-3 md:p-6 flex flex-col w-full bg-[#1e293b] shadow-xl shadow-slate-600 rounded-2xl h-full">
+    <div className="p-3 md:p-6 flex flex-col w-full sm:w-72 md:w-80 bg-[#1e293b] shadow-xl shadow-slate-600 rounded-2xl h-full">
       <div className="flex flex-col flex-1 justify-between min-h-[200px]">
         {/* Header */}
         <div>

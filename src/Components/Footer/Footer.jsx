@@ -27,7 +27,7 @@ export const Footer = () => {
   };
 
   return (
-    <div id='Contact' className='bg-[#1F2937] text-white p-10 md:p-12'>
+    <div id='Contact' className=' text-white p-10 md:p-12'>
       <div className="md:flex md:flex-row flex-col justify-around items-start gap-10">
 
         {/* Heading */}

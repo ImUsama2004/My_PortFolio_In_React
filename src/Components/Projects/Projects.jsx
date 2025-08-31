@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const Projects = () => {
   const [modalContent, setModalContent] = useState({ type: '', content: '' });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -18,27 +19,31 @@ export const Projects = () => {
   const [projects, setProjects] = useState([
     {
       title: "Coffee Website Design",
-      description: "This is a coffee Website Design. It has multiple features like online ordering, menu showcase, and responsive layout.",
-      demo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      description:
+        "This is a coffee Website Design. It has multiple features like online ordering, menu showcase, and responsive layout.",
+      demo: "/videos/coffee-demo.mp4",
       code: "https://github.com/username/coffee-website",
       image: "/assets/pic.jpg"
     },
     {
       title: "E-Learning Website",
-      description: "Our e-learning website is a modern platform designed to connect students with skilled teachers for personalized learning. Students can easily browse teacher profiles, choose suitable classes, and opt for online or physical sessions based on their preferences. Teachers can showcase their expertise, manage schedules, and respond to students’ queries efficiently through our dynamic Q&A section.academic growth, skill development, and seamless communication between students and teachers.",
-      demo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      description:
+        "Our e-learning website is a modern platform designed to connect students with skilled teachers for personalized learning. Students can easily browse teacher profiles, choose suitable classes, and opt for online or physical sessions based on their preferences. Teachers can showcase their expertise, manage schedules, and respond to students’ queries efficiently through our dynamic Q&A section.",
+      demo: "/videos/elearning-demo.mp4",
       code: "https://github.com/username/elearning-website",
       image: "/assets/pic.jpg"
     },
     {
       title: "Portfolio Website",
-      description: "This is my personal portfolio website built with React to showcase my projects and skills.",
-      demo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      description:
+        "This is my personal portfolio website built with React to showcase my projects and skills.",
+      demo: "/videos/portfolio-demo.mp4",
       code: "https://github.com/username/portfolio-website",
       image: "/assets/pic.jpg"
     }
   ]);
 
+  // Detect screen size for animations
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 640);
     handleResize();
@@ -54,6 +59,7 @@ export const Projects = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalContent({ type: '', content: '' });
+    setIframeLoaded(false); // Reset loader
   };
 
   const handleChange = (e) => {
@@ -73,7 +79,12 @@ export const Projects = () => {
   };
 
   const handleAddProject = () => {
-    if (!formData.title.trim() || !formData.description.trim() || !formData.demo.trim() || !formData.code.trim()) {
+    if (
+      !formData.title.trim() ||
+      !formData.description.trim() ||
+      !formData.demo.trim() ||
+      !formData.code.trim()
+    ) {
       alert("Please fill all fields.");
       return;
     }
@@ -87,9 +98,9 @@ export const Projects = () => {
   };
 
   return (
-    <div id="Projects" className="p-10 md:p-24 text-white">
+    <div id="Projects" className="p-10 md:p-24  text-white">
       <div className="flex justify-between items-center">
-        <h1 className='text-2xl md:text-4xl text-[#38bdf8] font-bold'>Projects</h1>
+        <h1 className="text-2xl md:text-4xl text-[#38bdf8] font-bold">Projects</h1>
         <button
           onClick={() => setShowForm(true)}
           className="bg-[#38bdf8] text-black font-bold px-4 py-2 rounded-lg hover:bg-[#0ea5e9] transition text-xl"
@@ -157,18 +168,24 @@ export const Projects = () => {
               </button>
 
               {modalContent.type === 'text' && (
-                <p className="text-gray-900 dark:text-gray-100">{modalContent.content}</p>
+                <p className="text-gray-900 dark:text-gray-100">
+                  {modalContent.content}
+                </p>
               )}
 
               {modalContent.type === 'video' && (
-                <div className="aspect-video mt-2">
-                  <iframe
-                    src={modalContent.content}
-                    title="Project Demo"
-                    frameBorder="0"
-                    allowFullScreen
-                    className="w-full h-full rounded-lg"
-                  ></iframe>
+                <div className="aspect-video mt-2 relative flex items-center justify-center">
+                  {!iframeLoaded && <span className="text-white">Loading...</span>}
+                  {isModalOpen && modalContent.content && (
+                    <video
+                      key={modalContent.content}
+                      src={modalContent.content}
+                      controls
+                      autoPlay
+                      className="w-full h-full rounded-lg"
+                      onLoadedData={() => setIframeLoaded(true)}
+                    />
+                  )}
                 </div>
               )}
             </motion.div>
@@ -176,7 +193,7 @@ export const Projects = () => {
         )}
       </AnimatePresence>
 
-      {/* Add Project Form Modal with Live Preview */}
+      {/* Add Project Form Modal */}
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -223,7 +240,7 @@ export const Projects = () => {
                 <input
                   type="text"
                   name="demo"
-                  placeholder="Demo Video Link (YouTube Embed)"
+                  placeholder="Local Video Path (e.g., /videos/my-demo.mp4)"
                   value={formData.demo}
                   onChange={handleChange}
                   className="p-2 rounded-lg border border-gray-500 bg-[#0f172a] text-white placeholder-gray-400"
@@ -253,13 +270,15 @@ export const Projects = () => {
                     className="w-full h-40 object-cover rounded-lg"
                   />
                 )}
-                <h3 className="text-xl font-bold text-[#38bdf8]">{formData.title || "Project Title"}</h3>
+                <h3 className="text-xl font-bold text-[#38bdf8]">
+                  {formData.title || 'Project Title'}
+                </h3>
                 <p className="text-gray-300 text-sm">
                   {formData.description
                     ? formData.description.length > 100
-                      ? formData.description.slice(0, 100) + "..."
+                      ? formData.description.slice(0, 100) + '...'
                       : formData.description
-                    : "Project description preview..."}
+                    : 'Project description preview...'}
                 </p>
               </div>
 
