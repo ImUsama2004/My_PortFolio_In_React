@@ -66,10 +66,13 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
 
         {/* Buttons */}
         <div className="mt-2 p-2 md:p-4 flex flex-col sm:flex-row justify-between items-center sm:gap-2 md:gap-4">
+
+          {/* Demo Button */}
           <motion.button
             onClick={() => openModal("video")}
-            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0
-              bg-gradient-to-r from-green-700 via-green-800 to-green-900"
+            className="text-white py-0.5 px-3 text-sm sm:text-sm md:text-lg rounded-sm font-semibold w-full sm:w-auto
+                       bg-gradient-to-r from-[#1A2980] via-[#26D0CE] to-[#1A2980]
+                       border-2 border-transparent shadow-[0_0_10px_#38bdf8,0_4px_10px_#38bdf8]"
             animate={{
               x: [0, 3, 0, -3, 0],
               y: [0, -3, 0, 3, 0]
@@ -86,10 +89,12 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
             Demo
           </motion.button>
 
+          {/* Code Button */}
           <motion.button
             onClick={() => window.open(codeUrl, "_blank")}
-            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0
-              bg-gradient-to-r from-green-600 via-green-700 to-green-800"
+            className="text-white py-0.5 px-3 text-sm sm:text-sm md:text-lg rounded-sm font-semibold w-full sm:w-auto
+                       bg-gradient-to-r from-[#1A2980] via-[#26D0CE] to-[#1A2980]
+                       border-2 border-transparent shadow-[0_0_10px_#38bdf8,0_4px_10px_#38bdf8]"
             animate={{
               x: [0, 3, 0, -3, 0],
               y: [0, -3, 0, 3, 0]
@@ -106,10 +111,11 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
             Code
           </motion.button>
 
+          {/* Delete Button */}
           <motion.button
             onClick={onDelete}
-            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto
-              bg-gradient-to-r from-red-700 via-red-800 to-red-900"
+            className="text-white py-1 px-3 text-sm sm:text-sm md:text-lg rounded-sm font-semibold w-full sm:w-auto
+              bg-gradient-to-r from-red-700 via-red-800 to-red-900 shadow-[0_0_10px_#f87171,0_4px_10px_#f87171]"
             animate={{
               x: [0, 3, 0, -3, 0],
               y: [0, -3, 0, 3, 0]
