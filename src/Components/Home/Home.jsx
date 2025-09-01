@@ -46,7 +46,7 @@ export const Home = () => {
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           viewport={{amount: 0.3 }}
         >
-          <button className="mt-5 md:mt-10 text-white py-2 px-6 text-sm md:text-lg rounded-3xl bg-[#38bdf8] hover:bg-[#0ea5e9] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105">
+          <button className="mt-5 md:mt-10 text-white py-2 px-6 text-sm md:text-lg rounded-3xl bg-[#38bdf8] hover:bg-[#0ea5e9] transition-all duration-300 shadow-[0_0_25px_#38bdf8] hover:shadow-[0_0_35px_#38bdf8] hover:scale-105">
             Contact Me
           </button>
         </motion.a>
@@ -61,7 +61,7 @@ export const Home = () => {
         viewport={{ amount: 0.3 }}
       >
         <img
-          className="w-full mt-28 max-w-md rounded-2xl shadow-xl object-cover"
+          className="w-full mt-40 max-w-md rounded-2xl shadow-[0_0_25px_#38bdf8] object-cover"
           src={MyPic}
           alt="Muhammad Usama"
         />

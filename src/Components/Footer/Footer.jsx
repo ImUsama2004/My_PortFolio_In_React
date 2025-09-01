@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import emailjs from '@emailjs/browser';
-import { FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 
 export const Footer = () => {
   const form = useRef();
@@ -47,7 +47,7 @@ export const Footer = () => {
       bgGradient: 'bg-gradient-to-r from-gray-800 to-gray-600'
     },
     { 
-      icon: <FaPhone />, 
+      icon: <FaPhoneAlt />, 
       text: '+92 336 9610764', 
       link: 'tel:+923369610764',
       bgGradient: 'bg-gradient-to-r from-teal-600 to-teal-400'
@@ -75,7 +75,7 @@ export const Footer = () => {
           <h1 className='text-2xl md:text-6xl font-bold text-[#38bdf8]'>Contact</h1>
           <h3 className='text-sm md:text-2xl font-normal text-[#38bdf8]'>Feel Free To Contact</h3>
 
-          {/* Contact Links with dancing animation and brand backgrounds */}
+          {/* Contact Links */}
           <div className="mt-2 flex flex-col gap-2 md:gap-3">
             {contacts.map((contact, index) => (
               <motion.a
@@ -83,8 +83,8 @@ export const Footer = () => {
                 href={contact.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2 text-sm md:text-base text-white p-2 rounded shadow-md hover:shadow-white
-                  ${contact.bgGradient}`} // background gradient for all screens
+                className={`flex items-center gap-2 text-sm md:text-base text-white p-2 rounded shadow-[0_0_15px_#38bdf8] hover:shadow-[0_0_25px_#38bdf8]
+                  ${contact.bgGradient}`}
                 animate={{
                   x: [0, 3, 0, -3, 0],
                   y: [0, -3, 0, 3, 0]
@@ -119,31 +119,31 @@ export const Footer = () => {
             name="user_name"
             placeholder="Your Name"
             required
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 rounded bg-gray-800 border border-gray-600 shadow-[0_0_15px_#38bdf8] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
             name="user_email"
             placeholder="Your Email"
             required
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 rounded bg-gray-800 border border-gray-600 shadow-[0_0_15px_#38bdf8] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
             name="subject"
             placeholder="Subject"
             required
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 rounded bg-gray-800 border border-gray-600 shadow-[0_0_15px_#38bdf8] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <textarea
             name="message"
             placeholder="Your Message"
             required
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
+            className="p-3 rounded bg-gray-800 border border-gray-600 shadow-[0_0_15px_#38bdf8] focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
           />
           <button
             type="submit"
-            className="bg-[#38bdf8] text-black font-semibold py-3 rounded hover:bg-blue-400 transition"
+            className="bg-[#38bdf8] text-black font-semibold py-3 rounded shadow-[0_0_15px_#38bdf8] hover:shadow-[0_0_25px_#38bdf8] hover:bg-blue-400 transition"
           >
             Send Message
           </button>

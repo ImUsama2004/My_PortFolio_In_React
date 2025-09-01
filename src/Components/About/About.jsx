@@ -7,7 +7,7 @@ export const About = () => {
   return (
     <div
       id="About"
-      className="text-white md:flex items-center md:flex-wrap md:justify-center bg-[#1e293b]/80 shadow-xl mx-0 md:mx-20 bg-opacity-10 rounded-lg p-12"
+className="text-white md:flex items-center md:flex-wrap md:justify-center bg-[#1e293b]/80 shadow-[0_0_20px_#38bdf8] mx-0 md:mx-20 bg-opacity-10 rounded-lg p-12"
     >
       <div className="md:flex flex-wrap md:flex-row items-start gap-20">
 

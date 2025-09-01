@@ -1,22 +1,27 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [animate, setAnimate] = useState(false);
 
-  const toggleMenu = () => {
-    setMenu(!menu);
-  };
+  const toggleMenu = () => setMenu(!menu);
 
-    useEffect(() => {
-    setAnimate(true);
-  }, []);
+  useEffect(() => setAnimate(true), []);
 
   const title = "My Portfolio";
 
-    return (
-    <nav className="flex flex-wrap justify-between md:items-center text-white px-10 pt-6 md:px-20 bg-[#0f172a] shadow-lg sticky top-0 z-50">
-      <span className="font-bold tracking-wide text-2xl text-[#38bdf8] flex">
+  const links = [
+    { href: "#About", text: "About" },
+    { href: "#Projects", text: "Projects" },
+    { href: "#Experience", text: "Experience" },
+    { href: "#Contact", text: "Contact" },
+  ];
+
+  return (
+<nav className="flex flex-wrap justify-between md:items-center text-white px-10 pt-6 md:px-20 bg-[#0f172a] sticky top-0 z-50 shadow-[0_4px_20px_#38bdf8]">
+      
+      {/* Portfolio Title */}
+      <span className="font-bold tracking-wider text-5xl md:text-4xl text-[#38bdf8] flex">
         {title.split("").map((letter, index) => (
           <span
             key={index}
@@ -29,20 +34,15 @@ export const Navbar = () => {
         ))}
       </span>
 
-      <ul className={`${menu ? 'block' : 'hidden'} mx-24 py-2 mt-4 font-semibold bg-black px-2 rounded-xl bg-opacity-30 md:border-none text-center md:bg-transparent md:static md:mx-0 md:flex md:items-center gap-6`}>
-
-        <a href="#About">
-          <li className="text-md transition-all duration-300 p-1 md:p-0 rounded-md hover:bg-[#1e293b] hover:shadow-md hover:text-[#38bdf8]">About</li>
-        </a>
-        <a href="#Projects">
-          <li className="text-md transition-all duration-300 p-1 md:p-0 rounded-md hover:bg-[#1e293b] hover:shadow-md hover:text-[#38bdf8]">Projects</li>
-        </a>
-        <a href="#Experience">
-          <li className="text-md transition-all duration-300 p-1 md:p-0 rounded-md hover:bg-[#1e293b] hover:shadow-md hover:text-[#38bdf8]">Experience</li>
-        </a>
-        <a href="#Contact">
-          <li className="text-md transition-all duration-300 p-1 md:p-0 rounded-md hover:bg-[#1e293b] hover:shadow-md hover:text-[#38bdf8]">Contact</li>
-        </a>
+      {/* Links */}
+      <ul className={`${menu ? 'block' : 'hidden'} mx-24 py-2 mt-4 font-semibold md:border-none text-center md:bg-transparent md:static md:mx-0 md:flex md:items-center gap-6`}>
+        {links.map((link, index) => (
+          <a key={index} href={link.href}>
+            <li className="text-md text-[#38bdf8] transition-colors duration-300 hover:text-white p-1 md:p-0">
+              {link.text}
+            </li>
+          </a>
+        ))}
       </ul>
 
       {/* Hamburger / Close Icon */}

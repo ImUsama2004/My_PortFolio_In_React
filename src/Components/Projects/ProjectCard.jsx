@@ -27,7 +27,11 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
 
   return (
     <>
-      <div className="p-3 md:p-6 flex flex-col w-full sm:w-72 md:w-80 bg-[#1e293b] shadow-xl shadow-slate-600 rounded-2xl min-h-[550px] max-h-[550px]">
+      <div
+        className="p-3 md:p-6 flex flex-col w-full sm:w-72 md:w-80 bg-[#1e293b] 
+                   rounded-2xl min-h-[550px] max-h-[550px] 
+                   shadow-[0_0_20px_#38bdf8,0_10px_25px_#38bdf8]"
+      >
         {/* Image */}
         <img
           className="p-4 rounded-lg object-cover w-full h-48 sm:h-56 md:h-60"
@@ -62,24 +66,65 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
 
         {/* Buttons */}
         <div className="mt-2 p-2 md:p-4 flex flex-col sm:flex-row justify-between items-center sm:gap-2 md:gap-4">
-          <button
+          <motion.button
             onClick={() => openModal("video")}
-            className="text-white py-2 px-3 bg-[#38bdf8] text-sm sm:text-sm md:text-lg hover:opacity-85 duration-75-300 hover:scale-105 font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0"
+            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0
+              bg-gradient-to-r from-green-700 via-green-800 to-green-900"
+            animate={{
+              x: [0, 3, 0, -3, 0],
+              y: [0, -3, 0, 3, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+              delay: 0
+            }}
+            whileHover={{ scale: 1.05 }}
           >
             Demo
-          </button>
-          <button
+          </motion.button>
+
+          <motion.button
             onClick={() => window.open(codeUrl, "_blank")}
-            className="text-white py-2 px-3 bg-[#38bdf8] text-sm sm:text-sm md:text-lg hover:opacity-85 duration-75-300 hover:scale-105 font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0"
+            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto mb-2 sm:mb-0
+              bg-gradient-to-r from-green-600 via-green-700 to-green-800"
+            animate={{
+              x: [0, 3, 0, -3, 0],
+              y: [0, -3, 0, 3, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+              delay: 0.2
+            }}
+            whileHover={{ scale: 1.05 }}
           >
             Code
-          </button>
-          <button
+          </motion.button>
+
+          <motion.button
             onClick={onDelete}
-            className="text-white py-2 px-3 bg-red-600 text-sm sm:text-sm md:text-lg hover:opacity-85 duration-75-300 hover:scale-105 font-semibold rounded-3xl w-full sm:w-auto"
+            className="text-white py-2 px-3 text-sm sm:text-sm md:text-lg font-semibold rounded-3xl w-full sm:w-auto
+              bg-gradient-to-r from-red-700 via-red-800 to-red-900"
+            animate={{
+              x: [0, 3, 0, -3, 0],
+              y: [0, -3, 0, 3, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+              delay: 0.4
+            }}
+            whileHover={{ scale: 1.05 }}
           >
             Delete
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -93,7 +138,7 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-[#1e293b] rounded-2xl p-6 max-w-lg w-full relative shadow-xl"
+              className="bg-[#1e293b] rounded-2xl p-6 max-w-lg w-full relative shadow-[0_0_25px_#38bdf8]"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
