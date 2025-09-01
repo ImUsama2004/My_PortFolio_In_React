@@ -43,6 +43,10 @@ export const Projects = () => {
     }
   ]);
 
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [showCodePrompt, setShowCodePrompt] = useState(false);
+  const secretCode = "MYSECRET123"; // replace with your actual secret code
+
   // Detect screen size for animations
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 640);
@@ -97,12 +101,21 @@ export const Projects = () => {
     setProjects((prev) => prev.filter((_, index) => index !== indexToDelete));
   };
 
+  // "+" button click handler
+  const handlePlusClick = () => {
+    if (!isAuthorized) {
+      setShowCodePrompt(true);
+    } else {
+      setShowForm(true);
+    }
+  };
+
   return (
-    <div id="Projects" className="p-10 md:p-24  text-white">
+    <div id="Projects" className="p-10 md:p-24 text-white">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl md:text-4xl text-[#38bdf8] font-bold">Projects</h1>
         <button
-          onClick={() => setShowForm(true)}
+          onClick={handlePlusClick}
           className="bg-[#38bdf8] text-black font-bold px-4 py-2 rounded-lg hover:bg-[#0ea5e9] transition text-xl"
         >
           +
@@ -113,13 +126,10 @@ export const Projects = () => {
       <div className="flex flex-wrap gap-6 mt-10">
         {projects.map((project, index) => {
           let initialAnim = {};
-          if (isMobile) {
-            initialAnim = { opacity: 0, y: 50 }; // mobile: slide from bottom
-          } else {
-            if (index % 3 === 0) initialAnim = { opacity: 0, x: -100 }; // left
-            else if (index % 3 === 1) initialAnim = { opacity: 0, y: -100 }; // center
-            else initialAnim = { opacity: 0, x: 100 }; // right
-          }
+          if (isMobile) initialAnim = { opacity: 0, y: 50 };
+          else if (index % 3 === 0) initialAnim = { opacity: 0, x: -100 };
+          else if (index % 3 === 1) initialAnim = { opacity: 0, y: -100 };
+          else initialAnim = { opacity: 0, x: 100 };
 
           return (
             <motion.div
@@ -168,9 +178,7 @@ export const Projects = () => {
               </button>
 
               {modalContent.type === 'text' && (
-                <p className="text-gray-900 dark:text-gray-100">
-                  {modalContent.content}
-                </p>
+                <p className="text-gray-900 dark:text-gray-100">{modalContent.content}</p>
               )}
 
               {modalContent.type === 'video' && (
@@ -188,6 +196,55 @@ export const Projects = () => {
                   )}
                 </div>
               )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Secret Code Prompt */}
+      <AnimatePresence>
+        {showCodePrompt && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-[#1e293b] rounded-2xl p-6 max-w-sm w-full relative shadow-xl flex flex-col gap-4"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={() => setShowCodePrompt(false)}
+                className="absolute top-3 right-3 text-xl font-bold text-gray-300 hover:text-white"
+              >
+                &times;
+              </button>
+              <h2 className="text-xl font-bold text-[#38bdf8] text-center">Enter Secret Code</h2>
+              <input
+                type="password"
+                placeholder="Secret Code"
+                id="codeInput"
+                className="p-2 rounded-lg border border-gray-500 bg-[#0f172a] text-white placeholder-gray-400"
+              />
+              <button
+                onClick={() => {
+                  const code = document.getElementById('codeInput').value;
+                  if (code === secretCode) {
+                    setIsAuthorized(true);
+                    setShowForm(true);
+                  } else {
+                    alert("Wrong code! You cannot add new projects.");
+                  }
+                  setShowCodePrompt(false);
+                }}
+                className="bg-[#38bdf8] text-black px-4 py-2 rounded hover:bg-[#0ea5e9]"
+              >
+                Submit
+              </button>
             </motion.div>
           </motion.div>
         )}

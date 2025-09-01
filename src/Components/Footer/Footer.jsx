@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import emailjs from '@emailjs/browser';
+import { FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
 
 export const Footer = () => {
   const form = useRef();
@@ -10,10 +11,10 @@ export const Footer = () => {
     e.preventDefault();
 
     emailjs.sendForm(
-      'service_lmsa5mh',    // Replace with your Service ID from EmailJS
-      'template_931yalq',   // Replace with your Template ID from EmailJS
+      'service_lmsa5mh',
+      'template_931yalq',
       form.current,
-      'YqLUNUIx7OgyzXx-c'     // Replace with your Public Key / User ID
+      'YqLUNUIx7OgyzXx-c'
     )
     .then(
       (result) => {
@@ -26,13 +27,21 @@ export const Footer = () => {
     );
   };
 
+  const contacts = [
+    { icon: <FaEnvelope />, text: 'em.usama2004@gmail.com', link: 'mailto:em.usama2004@gmail.com' },
+    { icon: <FaLinkedin />, text: 'LinkedIn', link: 'https://www.linkedin.com/in/muhammad-usama-88a306267/' },
+    { icon: <FaGithub />, text: 'GitHub', link: 'https://github.com/ImUsama2004' },
+    { icon: <FaPhone />, text: '+92 336 9610764', link: 'tel:+923369610764' },
+    { icon: <FaWhatsapp />, text: '+92 336 9610674', link: 'https://wa.me/923369610674' },
+  ];
+
   return (
-    <div id='Contact' className=' text-white p-10 md:p-12'>
+    <div id='Contact' className='text-white p-10 md:p-12'>
       <div className="md:flex md:flex-row flex-col justify-around items-start gap-10">
 
-        {/* Heading */}
+        {/* Heading + Contact Links */}
         <motion.div
-          className="flex flex-col items-center md:items-start gap-2 mb-6 md:mb-0"
+          className="flex flex-col items-center md:items-start gap-2 mb-6 md:mb-0 -mt-4"
           initial={{ x: -200, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -40,6 +49,33 @@ export const Footer = () => {
         >
           <h1 className='text-2xl md:text-6xl font-bold text-[#38bdf8]'>Contact</h1>
           <h3 className='text-sm md:text-2xl font-normal text-[#38bdf8]'>Feel Free To Contact</h3>
+
+          {/* Contact Links with dancing animation */}
+          <div className="mt-2 flex flex-col gap-2 md:gap-3">
+            {contacts.map((contact, index) => (
+              <motion.a
+                key={index}
+                href={contact.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm md:text-base text-white p-2 rounded shadow-md hover:text-[#22d3ee] hover:shadow-[#22d3ee]/50"
+                animate={{
+                  x: [0, 3, 0, -3, 0],
+                  y: [0, -3, 0, 3, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                  delay: index * 0.2
+                }}
+                whileHover={{ scale: 1.05 }}
+              >
+                {contact.icon} {contact.text}
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
 
         {/* Contact Form */}
@@ -88,6 +124,11 @@ export const Footer = () => {
           {successMessage && <p className="text-green-400 mt-2">{successMessage}</p>}
         </motion.form>
 
+      </div>
+
+      {/* Copyright Line */}
+      <div className="mt-8 text-center text-sm text-gray-400">
+        &copy; {new Date().getFullYear()} Muhammad Usama. All rights reserved.
       </div>
     </div>
   );
