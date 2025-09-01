@@ -28,11 +28,36 @@ export const Footer = () => {
   };
 
   const contacts = [
-    { icon: <FaEnvelope />, text: 'em.usama2004@gmail.com', link: 'mailto:em.usama2004@gmail.com' },
-    { icon: <FaLinkedin />, text: 'LinkedIn', link: 'https://www.linkedin.com/in/muhammad-usama-88a306267/' },
-    { icon: <FaGithub />, text: 'GitHub', link: 'https://github.com/ImUsama2004' },
-    { icon: <FaPhone />, text: '+92 336 9610764', link: 'tel:+923369610764' },
-    { icon: <FaWhatsapp />, text: '+92 336 9610674', link: 'https://wa.me/923369610674' },
+    { 
+      icon: <FaEnvelope />, 
+      text: 'em.usama2004@gmail.com', 
+      link: 'mailto:em.usama2004@gmail.com',
+      bgGradient: 'bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500'
+    },
+    { 
+      icon: <FaLinkedin />, 
+      text: 'LinkedIn', 
+      link: 'https://www.linkedin.com/in/muhammad-usama-88a306267/',
+      bgGradient: 'bg-gradient-to-r from-blue-700 to-blue-400'
+    },
+    { 
+      icon: <FaGithub />, 
+      text: 'GitHub', 
+      link: 'https://github.com/ImUsama2004',
+      bgGradient: 'bg-gradient-to-r from-gray-800 to-gray-600'
+    },
+    { 
+      icon: <FaPhone />, 
+      text: '+92 336 9610764', 
+      link: 'tel:+923369610764',
+      bgGradient: 'bg-gradient-to-r from-teal-600 to-teal-400'
+    },
+    { 
+      icon: <FaWhatsapp />, 
+      text: '+92 336 9610674', 
+      link: 'https://wa.me/923369610674',
+      bgGradient: 'bg-gradient-to-r from-green-600 to-green-400'
+    },
   ];
 
   return (
@@ -50,7 +75,7 @@ export const Footer = () => {
           <h1 className='text-2xl md:text-6xl font-bold text-[#38bdf8]'>Contact</h1>
           <h3 className='text-sm md:text-2xl font-normal text-[#38bdf8]'>Feel Free To Contact</h3>
 
-          {/* Contact Links with dancing animation */}
+          {/* Contact Links with dancing animation and brand backgrounds */}
           <div className="mt-2 flex flex-col gap-2 md:gap-3">
             {contacts.map((contact, index) => (
               <motion.a
@@ -58,7 +83,8 @@ export const Footer = () => {
                 href={contact.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm md:text-base text-white p-2 rounded shadow-md hover:text-[#22d3ee] hover:shadow-[#22d3ee]/50"
+                className={`flex items-center gap-2 text-sm md:text-base text-white p-2 rounded shadow-md hover:shadow-white
+                  ${contact.bgGradient}`} // background gradient for all screens
                 animate={{
                   x: [0, 3, 0, -3, 0],
                   y: [0, -3, 0, 3, 0]
