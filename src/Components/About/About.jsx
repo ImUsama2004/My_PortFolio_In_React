@@ -1,6 +1,5 @@
 import React from "react";
 import { IoArrowForward } from "react-icons/io5";
-import Developer from "../../assets/Developer.png";
 import { motion } from "framer-motion";
 
 export const About = () => {
@@ -22,7 +21,7 @@ className="text-white md:flex items-center md:flex-wrap md:justify-center bg-[#1
           <h2 className="text-2xl md:text-4xl font-bold text-[#38bdf8] mb-6">
             About
           </h2>
-          <img src={Developer} alt="Developer" className="h-64" />
+          <img src="/assets/Developer.png" alt="Developer" className="h-64" />
         </motion.div>
 
         {/* Paragraph Section (slide from right) */}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import pic from "../../assets/pic.jpg";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
@@ -35,7 +35,7 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
         {/* Image */}
         <img
           className="p-4 rounded-lg object-cover w-full h-48 sm:h-56 md:h-60"
-          src={pic}
+          src="/assets/pic.jpg"
           alt={title}
         />
 
