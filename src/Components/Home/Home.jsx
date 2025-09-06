@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 export const Home = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isHireOpen, setIsHireOpen] = useState(false);
@@ -10,14 +9,26 @@ export const Home = () => {
     <div className="text-white flex flex-col md:flex-row w-full justify-between items-start p-10 md:p-20 gap-10">
       {/* Text Section */}
       <div className="md:w-1/2">
+        {/* Name with letter-by-letter animation */}
         <motion.h1
-          className="text-2xl md:text-6xl font-bold leading-normal tracking-tighter text-[#38bdf8]"
-          initial={{ x: -150, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ amount: 0.3 }}
+          className="text-2xl md:text-6xl font-bold leading-normal tracking-tighter text-[#38bdf8] flex flex-wrap"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.3,once:false }}
+          transition={{ staggerChildren: 0.08 }}
         >
-          Muhammad Usama Saeed
+          {"Muhammad Usama Saeed".split("").map((char, index) => (
+            <motion.span
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
         </motion.h1>
 
         <motion.p
@@ -71,8 +82,8 @@ export const Home = () => {
                        bg-green-500 hover:bg-green-600 border-2 border-transparent 
                        shadow-[0_0_25px_#34d399,0_10px_25px_#34d399]"
             animate={{
-              x: [0, 5, 0, -5, 0],
-              y: [0, -5, 0, 5, 0]
+              x: [0, 0, 12, 0, -12, 0],
+              y: [0, -12, 0, 12, 0, 0]
             }}
             transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
             whileHover={{ scale: 1.05 }}
@@ -87,8 +98,8 @@ export const Home = () => {
                        bg-purple-500 hover:bg-purple-600 border-2 border-transparent 
                        shadow-[0_0_25px_#a78bfa,0_10px_25px_#a78bfa]"
             animate={{
-              x: [0, 5, 0, -5, 0],
-              y: [0, -5, 0, 5, 0]
+              x: [0, 0, 12, 0, -12, 0],
+              y: [0, -12, 0, 12, 0, 0]
             }}
             transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
             whileHover={{ scale: 1.05 }}
@@ -108,7 +119,7 @@ export const Home = () => {
         transition={{ duration: 3, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
       >
         <img
-          className="w-full mt-40 max-w-md rounded-2xl shadow-[0_0_25px_#38bdf8] object-cover"
+          className="w-full md:mt-40 max-w-md rounded-2xl shadow-[0_0_25px_#38bdf8] object-cover"
           src="/assets/MyPic.jpg"
           alt="Muhammad Usama"
         />

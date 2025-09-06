@@ -40,11 +40,11 @@ export const Navbar = () => {
       </div>
 
       {/* Links */}
-      <ul className={`w-full md:w-auto mt-4 md:mt-0 font-semibold text-center md:flex md:items-center gap-6
+      <ul className={`w-full md:w-auto mt-4 md:mt-0 font-semibold text-center md:flex md:self-end gap-6
         ${menu ? 'block' : 'hidden'}`}>
         {links.map((link, index) => (
           <a key={index} href={link.href}>
-            <li className="text-md text-[#38bdf8] transition-colors duration-300 hover:text-white py-2 md:py-0">
+            <li className="text-[18px] text-[#38bdf8] transition-colors duration-300 hover:text-white hover:underline py-2 md:py-0">
               {link.text}
             </li>
           </a>

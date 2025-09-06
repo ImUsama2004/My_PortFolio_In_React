@@ -23,12 +23,6 @@ export const projects = [
       code: "https://github.com/username/portfolio-website",
       image: "/assets/pic.jpg"
     },
-    {
-      title: "Portfolio Website",
-      description:
-        "This is my personal portfolio website built with React to showcase my projects and skills.",
-      demo: "/videos/portfolio-demo.mp4",
-      code: "https://github.com/username/portfolio-website",
-      image: "/assets/pic.jpg"
-    }
-  ]
+     
+    
+  ]                                                                                                                                                             

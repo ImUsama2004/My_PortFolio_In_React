@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import { motion, AnimatePresence } from "framer-motion";
 
-export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
+export const ProjectCard = ({ title, main, videoPath, codeUrl, index, isMobile }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(""); // 'text' or 'video'
   const [showSeeMore, setShowSeeMore] = useState(false);
   const descRef = useRef(null);
 
+  // Detect if description overflows
   useEffect(() => {
     const desc = descRef.current;
     if (desc) {
@@ -25,8 +25,21 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
     setModalType("");
   };
 
+  // Animation logic that was in Projects.jsx
+  let initialAnim = {};
+  if (isMobile) initialAnim = { opacity: 0, y: 50 };
+  else if (index % 3 === 0) initialAnim = { opacity: 0, x: -100 };
+  else if (index % 3 === 1) initialAnim = { opacity: 0, y: -100 };
+  else initialAnim = { opacity: 0, x: 100 };
+
   return (
-    <>
+    <motion.div
+      className="relative overflow-visible"
+      initial={initialAnim}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+    >
       <div
         className="p-3 md:p-6 flex flex-col w-full sm:w-72 md:w-80 bg-[#1e293b] 
                    rounded-2xl min-h-[550px] max-h-[550px] 
@@ -66,7 +79,6 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
 
         {/* Buttons */}
         <div className="mt-2 p-2 md:p-4 flex flex-col sm:flex-row justify-between items-center sm:gap-2 md:gap-4">
-
           {/* Demo Button */}
           <motion.button
             onClick={() => openModal("video")}
@@ -109,27 +121,6 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
             whileHover={{ scale: 1.05 }}
           >
             Code
-          </motion.button>
-
-          {/* Delete Button */}
-          <motion.button
-            onClick={onDelete}
-            className="text-white py-1 px-3 text-sm sm:text-sm md:text-lg rounded-sm font-semibold w-full sm:w-auto
-              bg-gradient-to-r from-red-700 via-red-800 to-red-900 shadow-[0_0_10px_#f87171,0_4px_10px_#f87171]"
-            animate={{
-              x: [0, 3, 0, -3, 0],
-              y: [0, -3, 0, 3, 0]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "loop",
-              ease: "easeInOut",
-              delay: 0.4
-            }}
-            whileHover={{ scale: 1.05 }}
-          >
-            Delete
           </motion.button>
         </div>
       </div>
@@ -181,6 +172,6 @@ export const ProjectCard = ({ title, main, videoPath, codeUrl, onDelete }) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.div>
   );
 };
